@@ -131,7 +131,7 @@
                                             <img src="img/svg_icon/1.svg" alt="">
                                         </div>
                                         <div class="jobs_conetent">
-                                            <a href="job_details.html"><h4>Software Engineer</h4></a>
+                                            <a href="job_details.html"><h4>Проверка услуги</h4></a>
                                             <div class="links_locat d-flex align-items-center">
                                                 <div class="location">
                                                     <p> <i class="fa fa-map-marker"></i> California, USA</p>
@@ -144,7 +144,7 @@
                                     </div>
                                     <div class="jobs_right">
                                         <div class="apply_now">
-                                            <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
+                                            <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
                                             <a href="job_details.html" class="boxed-btn3">Apply Now</a>
                                         </div>
                                         <div class="date">

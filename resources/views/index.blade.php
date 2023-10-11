@@ -38,54 +38,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Монтажные работы</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Строительство</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Отделочные работы</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Кровельные работы</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Земляные работы</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Демонтаж</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Каменные работы</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xl-3 col-md-6">
-                    <div class="single_catagory">
-                        <a href="jobs.html"><h4>Слаботочные работы</h4></a>
-                        <p> <span>50</span> услуг</p>
-                    </div>
-                </div>
+                @foreach($categories as $category)
+                    <x-category :category="$category"></x-category>
+                @endforeach
             </div>
         </div>
     </div>
@@ -115,7 +70,7 @@
                                     <img src="img/svg_icon/1.svg" alt="">
                                 </div>
                                 <div class="jobs_conetent">
-                                    <a href="job_details.html"><h4>Software Engineer</h4></a>
+                                    <a href="job_details.html"><h4>Проверка услуги</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
                                             <p> <i class="fa fa-map-marker"></i> California, USA</p>

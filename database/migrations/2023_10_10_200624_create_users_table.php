@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('wallet_id')->constrained();
             $table->string('telephone', 15);
             $table->string('avatar', 100)->default('img/avatar.jpg');
-            $table->date('foundation_date');
+            $table->date('foundation_date')->default(NOW());;
             $table->timestamp('signup_date')->default(New Expression('NOW()'));
         });
     }
