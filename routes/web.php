@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,10 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, 'index'])->name('main-page');
+
+Route::get('/login', [PageController::class, 'login'])->name('login-page');
+Route::post('/login', [UserController::class, "login"])->name('login');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
 Route::get('/services', [PageController::class, 'services'])->name('services-page');

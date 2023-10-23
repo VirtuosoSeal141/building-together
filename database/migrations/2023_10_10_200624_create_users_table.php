@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
 
 return new class extends Migration
 {
@@ -14,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name', 30);
+            $table->string('email', 50)->unique();
             $table->string('password');
             $table->foreignId('role_id')->constrained();
             $table->foreignId('wallet_id')->constrained();
             $table->string('telephone', 15);
             $table->string('avatar', 100)->default('img/avatar.jpg');
-            $table->date('foundation_date')->default(NOW());;
-            $table->timestamp('signup_date')->default(New Expression('NOW()'));
+            $table->date('foundation_date')->default(NOW());
+            $table->date('signup_date')->default(NOW());
         });
     }
 

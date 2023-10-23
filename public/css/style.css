@@ -7471,4 +7471,8 @@ h6 {
   font-size: 12px;
 }
 
+.form__error {
+  color: #f84646;
+}
+
 /*# sourceMappingURL=style.css.map */

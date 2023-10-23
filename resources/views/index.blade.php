@@ -10,7 +10,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">4567+ услуг опубликовано</h5>
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">{{count($services)}} услуг опубликовано</h5>
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Найди свою услугу</h3>
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Мы предоставляем онлайн платформу для поиска услуг и специалистов в строительной сфере</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
@@ -265,4 +265,8 @@
         </div>
     </div>
     <!-- job_searcing_wrap end  -->
+@endsection
+
+@section('script')
+    <script src="js/gijgo.min.js"></script>
 @endsection

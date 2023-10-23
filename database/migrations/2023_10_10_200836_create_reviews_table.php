@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
 
 return new class extends Migration
 {
@@ -14,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');
+            $table->string('comment', 200);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('service_id')->constrained();
-            $table->unsignedInteger('rating');
-            $table->timestamp('publication_date')->default(New Expression('NOW()'));
+            $table->integer('rating');
+            $table->date('publication_date')->default(NOW());
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -11,12 +12,23 @@ class PageController extends Controller
 
         $categories  = Category::orderBy('id','asc')->get();
 
-        return view('index', compact('categories'));
+        $services = Service::all();
+
+        return view('index', compact('categories', 'services'));
+    }
+
+    public function login(){
+
+        return view('login');
     }
 
     public function services(){
 
-        return view('services');
+        $categories  = Category::orderBy('id','asc')->get();
+
+        $services = Service::all();
+
+        return view('services', compact('categories', 'services'));
     }
     
 }

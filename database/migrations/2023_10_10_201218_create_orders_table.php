@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('service_id')->constrained();
             $table->foreignId('status_id')->constrained();
-            $table->unsignedInteger('quantity');
-            $table->bigInteger('cost');
+            $table->integer('quantity');
+            $table->float('cost', 10, 2);
         });
     }
 
