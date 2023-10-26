@@ -20,6 +20,9 @@ Route::get('/', [PageController::class, 'index'])->name('main-page');
 Route::get('/login', [PageController::class, 'login'])->name('login-page');
 Route::post('/login', [UserController::class, "login"])->name('login');
 
+Route::get('/sign-up/{id}', [PageController::class, 'signup'])->name('signup-page');
+Route::post('/sign-up/{id}', [UserController::class, "signup"])->name('signup');
+
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/services', [PageController::class, 'services'])->name('services-page');

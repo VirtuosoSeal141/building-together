@@ -80,7 +80,7 @@
 @endsection
 
 @section('script')
-<script src="js/range.js"></script>
+<script src="/js/range.js"></script>
 
 <script>
     $( function() {

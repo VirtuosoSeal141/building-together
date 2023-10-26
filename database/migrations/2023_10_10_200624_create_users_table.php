@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained();
             $table->foreignId('wallet_id')->constrained();
             $table->string('telephone', 15);
-            $table->string('avatar', 100)->default('img/avatar.jpg');
+            $table->string('avatar', 100)->default('img/avatars/avatar.jpg');
             $table->date('foundation_date')->default(NOW());
             $table->date('signup_date')->default(NOW());
         });

@@ -63,5 +63,5 @@
 @endsection
 
 @section('script')
-    <script src="js/gijgo.min.js"></script>
+    <script src="/js/gijgo.min.js"></script>
 @endsection
