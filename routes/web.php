@@ -23,6 +23,10 @@ Route::post('/login', [UserController::class, "login"])->name('login');
 Route::get('/sign-up/{id}', [PageController::class, 'signup'])->name('signup-page');
 Route::post('/sign-up/{id}', [UserController::class, "signup"])->name('signup');
 
+Route::get('/settings', [PageController::class, 'settings'])->name('settings-page');
+Route::post('/personal-settings', [UserController::class, "personalsettings"])->name('personalsettings');
+Route::post('/password-settings', [UserController::class, "passwordsettings"])->name('passwordsettings');
+
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/services', [PageController::class, 'services'])->name('services-page');

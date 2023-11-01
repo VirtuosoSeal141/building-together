@@ -33,7 +33,7 @@
                                                 <li><a href="#">Еще <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a href="#">Заказы</a></li>
-                                                        <li><a href="#">Настройки</a></li>
+                                                        <li><a href="{{route('settings-page')}}">Настройки</a></li>
                                                         <li><a href="{{route('logout')}}">Выйти</a></li>
                                                     </ul>
                                                 </li>

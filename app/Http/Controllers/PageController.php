@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Role;
 use App\Models\Service;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -27,12 +27,17 @@ class PageController extends Controller
 
         if ($id==1){
 
-            return redirect('/');
+            return back();
         }
 
         $role = Role::findOrfail($id);
 
         return view('sign-up', compact('role'));
+    }
+
+    public function settings(){
+
+        return view('settings');
     }
 
     public function services(){

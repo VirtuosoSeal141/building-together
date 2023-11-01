@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function  signup(Request $request, $id){
+    public function signup(Request $request, $id){
         if ($id === "3") {
             $userData = $request->all();
             $validator = Validator::make($userData, [
                 'email' => 'required|unique:users|email:rfc,dns,filter|max:50',
                 'name' => 'required|max:30',
                 'password' => 'required|max:50',
-                'telephone' => 'required|min:80000000000|numeric',
+                'telephone' => 'required|min:16',
             ]);
 
             if ($validator->fails()){
@@ -45,8 +45,8 @@ class UserController extends Controller
                 'email' => 'required|unique:users|email:rfc,dns,filter|max:50',
                 'name' => 'required|max:30',
                 'password' => 'required|max:50',
-                'telephone' => 'required|min:80000000000|numeric',
-                'found' => 'required',
+                'telephone' => 'required|min:16',
+                'found' => 'required|min:10',
                 'avatar' => 'required|image|mimes:png,jpeg,jpg',
             ]);
 
@@ -104,6 +104,63 @@ class UserController extends Controller
         return back()
             ->withErrors(['auth_error'=>'Email или пароль введены некорректно'])
             ->withInput();
+    }
+
+    public function personalsettings(Request $request){
+        $userData = $request->all();
+        $validator = Validator::make($userData, [
+            'email' => 'required|email:rfc,dns,filter|max:50',
+            'name' => 'required|max:30',
+            'telephone' => 'required|min:16',
+            'avatar' => 'image|mimes:png,jpeg,jpg',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->file('avatar') === null){
+            $avatar = Auth::user()->avatar;
+        } else{
+            $avatar = $request->file('avatar')->store('img/avatars');
+        }
+
+        $user = User::findOrFail(Auth::id());
+        $user->name = $userData['name'];
+        $user->email = $userData['email'];
+        $user->telephone = $userData['telephone'];
+        $user->avatar = $avatar;
+        $user->save();
+
+        return back();
+    }
+
+    public function passwordsettings(Request $request){
+        $passwordData = $request->all();
+        $validator = Validator::make($passwordData, [
+            'newpassword' => 'required|max:50',
+            'repeatpassword' => 'required|max:50',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if($passwordData['newpassword'] === $passwordData['repeatpassword']){
+            $user = User::findOrFail(Auth::id());
+            $user->password = bcrypt($passwordData['newpassword']);
+            $user->save();
+        } else {
+            return back()
+                ->withErrors(['password_error'=>'Неверный пароль'])
+                ->withInput();
+        }
+
+        return back();
     }
 
     public function logout(){

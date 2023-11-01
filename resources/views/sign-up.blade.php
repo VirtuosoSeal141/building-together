@@ -13,7 +13,7 @@
           <h2 class="contact-title">Зарегистрироваться как {{$role->title}}</h2>
         </div>
         <div class="col-lg-8">
-          <form class="form-contact contact_form" action="{{route('signup', $role->id)}}" method="post" enctype="multipart/form-data">
+          <form class="form-contact contact_form" action="{{route('signup', [$role->id])}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
             <div class="col-12">
@@ -42,7 +42,7 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <input class="form-control" name="telephone" id="telephone" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Телефон*'" placeholder = 'Телефон*' value="{{old('telephone')}}">
+                  <input class="form-control" name="telephone" id="telephone" type="text" data-mask="telephone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Телефон*'" placeholder = 'Телефон*' value="{{old('telephone')}}">
                   @error('telephone')
                     <span class="form__error">Введите телефон</span>
                   @enderror
@@ -51,7 +51,7 @@
               @if ($role->id === 2)
                 <div class="col-4">
                 <div class="form-group">
-                  <input class="form-control" name="found" id="found" type="text" onfocus="this.type = 'date'" onblur="if(this.value==''){this.type='text'}" placeholder = 'Дата основания*' value="{{old('found')}}">
+                  <input class="form-control" name="found" id="found" type="text" data-mask="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Дата основания*'" placeholder = 'Дата основания*' value="{{old('found')}}">
                   @error('found')
                     <span class="form__error">Выберите дату основания</span>
                   @enderror
@@ -99,4 +99,5 @@
 
 @section('script')
     <script src="/js/gijgo.min.js"></script>
+    <script src="/js/imask.js"></script>
 @endsection
