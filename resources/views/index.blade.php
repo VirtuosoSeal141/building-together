@@ -10,7 +10,17 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">{{count($services)}} услуг опубликовано</h5>
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">
+                                {{count($services)}}
+                                @if (count($services) == 1)
+                                    услуга
+                                @elseif (count($services) > 1 && count($services) < 5)
+                                    услуги
+                                @elseif (count($services) == 0 || count($services) > 4)
+                                    услуг
+                                @endif 
+                                опубликовано
+                            </h5>
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Найди свою услугу</h3>
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Мы предоставляем онлайн платформу для поиска услуг и специалистов в строительной сфере</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">

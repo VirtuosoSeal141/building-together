@@ -53,7 +53,7 @@
                 <div class="form-group">
                   <input class="form-control" name="found" id="found" type="text" data-mask="date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Дата основания*'" placeholder = 'Дата основания*' value="{{old('found')}}">
                   @error('found')
-                    <span class="form__error">Выберите дату основания</span>
+                    <span class="form__error">Введите дату основания</span>
                   @enderror
                 </div>
               </div>

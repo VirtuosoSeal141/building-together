@@ -3,7 +3,7 @@
 @section('title', 'Building Together - Услуги')
 
 @section('page-content')
-    <x-page-header title="{{count($services)}} услуг"></x-page-header>
+    <x-page-header title="Услуги"></x-page-header>
 
     <!-- job_listing_area_start  -->
     <div class="job_listing_area plus_padding">

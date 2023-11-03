@@ -7526,4 +7526,62 @@ h6 {
 	background-color: #eee;
 }
 
+.delbtn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(224, 0, 0);
+	text-align: center;
+	border-radius: 5px;
+	background-color: rgb(255, 224, 224);
+	line-height: 20px;
+	height: 40px;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	margin: 0;
+	transition: background-color 0.5s;
+}
+
+.delbtn:hover{
+  background-color: rgb(224, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.delbtn:focus{
+  box-shadow: 0 0 0 0.2rem rgba(255, 224, 224,.25);
+}
+
+.editbtn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(229, 138, 0);
+	text-align: center;
+	border-radius: 5px;
+	background-color: rgb(255, 235, 204);
+	line-height: 20px;
+	height: 40px;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	margin: 0;
+	transition: background-color 0.5s;
+}
+
+.editbtn:hover{
+  background-color: rgb(229, 138, 0);
+  color: rgb(255, 255, 255);
+}
+
+.editbtn:focus{
+  box-shadow: 0 0 0 0.2rem rgba(255, 235, 204,.25);
+}
+
 /*# sourceMappingURL=style.css.map */

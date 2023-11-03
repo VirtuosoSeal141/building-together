@@ -22,8 +22,8 @@
                                                 @if(Auth::user()->role->title == "Подрядчик")
                                                     <li><a href="{{route('services-page')}}">Услуги <i class="ti-angle-down"></i></a>
                                                         <ul class="submenu">
-                                                            <li><a href="#">Мои услуги</a></li>
-                                                            <li><a href="#">Добавить услугу</a></li>
+                                                            <li><a href="{{route('myservices-page')}}">Мои услуги</a></li>
+                                                            <li><a href="{{route('addservice-page')}}">Добавить услугу</a></li>
                                                         </ul>
                                                     </li>
                                                 @else
@@ -44,11 +44,11 @@
                                     </nav>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                                <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            @if(!Auth::user())
+                            @if(!Auth::user())
+                                <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                    <div class="main-menu  d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
                                                 <li><a href="{{route('login-page')}}">Вход</a></li>
                                                 <li><a href="#">Регистрация <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
@@ -56,11 +56,11 @@
                                                         <li><a href="{{route('signup-page', [2])}}">Подрядчик</a></li>
                                                     </ul>
                                                 </li>
-                                            @endif
-                                        </ul>
-                                    </nav>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>

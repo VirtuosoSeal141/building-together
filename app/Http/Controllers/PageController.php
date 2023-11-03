@@ -40,6 +40,29 @@ class PageController extends Controller
         return view('settings');
     }
 
+    public function myservices(){
+
+        $services = Auth::user()->services()->orderBy('id', 'desc')->get();
+
+        return view('my-services', compact('services'));
+    }
+
+    public function addservice(){
+
+        $categories  = Category::orderBy('id','asc')->get();
+
+        return view('add-service', compact('categories'));
+    }
+
+    public function editservice($id){
+
+        $categories  = Category::orderBy('id','asc')->get();
+
+        $service = Service::findOrFail($id);
+
+        return view('edit-service', compact('categories', 'service'));
+    }
+
     public function services(){
 
         $categories  = Category::orderBy('id','asc')->get();

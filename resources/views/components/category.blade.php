@@ -3,11 +3,11 @@
         <a href="#"><h4>{{$category->title}}</h4></a>
         <p> 
             <span>{{count($category->services)}}</span> 
-            @if (count($category->services)==1)
+            @if (count($category->services) == 1)
                 услуга
-            @elseif (count($category->services)==2)
+            @elseif (count($category->services) > 1 && count($category->services) < 5)
                 услуги
-            @else
+            @elseif (count($category->services) == 0 || count($category->services) > 4)
                 услуг
             @endif
         </p>

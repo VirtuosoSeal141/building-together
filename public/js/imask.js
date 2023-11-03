@@ -3291,5 +3291,11 @@ document.addEventListener('DOMContentLoaded', () => {
     max: new Date(), // максимальная дата СЕГОДНЯ
   })
 
+  // Маска для денег
+  mask('money', {
+    mask: Number,
+    thousandsSeparator: ' ' // разделитель тысяч в числе
+  })
+
 })
 
