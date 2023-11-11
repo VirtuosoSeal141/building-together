@@ -3,7 +3,7 @@
         <div class="jobs_left d-flex align-items-center">
             <img class="mr-4" src="/{{$service->user->avatar}}" style="width: 80px; height: 80px;" alt="">
             <div class="jobs_conetent">
-                <a href="job_details.html"><h4>{{$service->title}}</h4></a>
+                <a href="{{route('service-page', ['id' => $service->id])}}"><h4>{{$service->title}}</h4></a>
                 <div class="links_locat d-flex align-items-center">
                     <div class="location">
                         <p> <i class="fa fa-bars"></i> {{$service->category->title}}</p>

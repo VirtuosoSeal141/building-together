@@ -37,6 +37,8 @@ class UserController extends Controller
             $user->role_id = $id;
             $user->wallet_id = $wallet->id;
             $user->telephone = $userData['telephone'];
+            $user->foundation_date = now();
+            $user->signup_date = now();
             $user->save();
             
         } else {
@@ -71,6 +73,7 @@ class UserController extends Controller
             $user->telephone = $userData['telephone'];
             $user->avatar = $avatar;
             $user->foundation_date = $userData['found'];
+            $user->signup_date = now();
             $user->save();
         }
         

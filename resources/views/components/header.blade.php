@@ -16,7 +16,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{{route('main-page')}}">Главная</a></li>
-                                            <li><a href="#">Контакты</a></li>
+                                            <li><a href="{{route('contacts-page')}}">Контакты</a></li>
                                             <li><a href="#">О нас</a></li>
                                             @if(Auth::user())
                                                 @if(Auth::user()->role->title == "Подрядчик")

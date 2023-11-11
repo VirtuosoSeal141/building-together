@@ -41,3 +41,7 @@ Route::post('/editservice/{id}', [ServiceController::class, 'editservice'])->nam
 Route::get('/delservice/{id}', [ServiceController::class, 'delservice'])->name('delservice');
 
 Route::get('/services', [PageController::class, 'services'])->name('services-page');
+
+Route::get('/service/{id}', [PageController::class, 'service'])->name('service-page');
+
+Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts-page');

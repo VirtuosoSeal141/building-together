@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Review;
 use App\Models\Role;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +71,20 @@ class PageController extends Controller
         $services = Service::all();
 
         return view('services', compact('categories', 'services'));
+    }
+
+    public function service($id){
+
+        $service = Service::findOrFail($id);
+
+        $reviews = $service->reviews()->orderBy('id', 'desc')->get();
+
+        return view('service', compact('service', 'reviews'));
+    }
+
+    public function contacts(){
+
+        return view('contacts');
     }
     
 }

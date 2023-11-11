@@ -46,7 +46,7 @@
             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
             <div class="media-body">
               <h3>+7 (917) 553-71-07</h3>
-              <p>Пн - Сб, 9:00 - 18:00</p>
+              <p>Пн - Сб, 9:00 - 21:00</p>
             </div>
           </div>
           <div class="media contact-info">

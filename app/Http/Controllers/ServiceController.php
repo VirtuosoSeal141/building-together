@@ -57,13 +57,13 @@ class ServiceController extends Controller
         $service->price = $price;
         $service->save();
 
-        return redirect('myservices');
+        return back();
     }
 
     public  function delservice($id){
 
         Service::findOrFail($id)->delete();
 
-        return back();
+        return redirect('myservices');
     }
 }
