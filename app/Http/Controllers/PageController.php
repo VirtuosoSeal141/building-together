@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Review;
 use App\Models\Role;
 use App\Models\Service;
+use App\Models\Unit;
+use App\Models\View;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
@@ -52,16 +54,20 @@ class PageController extends Controller
 
         $categories  = Category::orderBy('id','asc')->get();
 
-        return view('add-service', compact('categories'));
+        $units = Unit::orderBy('id','asc')->get();
+
+        return view('add-service', compact('categories', 'units'));
     }
 
     public function editservice($id){
 
         $categories  = Category::orderBy('id','asc')->get();
 
+        $units = Unit::orderBy('id','asc')->get();
+
         $service = Service::findOrFail($id);
 
-        return view('edit-service', compact('categories', 'service'));
+        return view('edit-service', compact('categories', 'service', 'units'));
     }
 
     public function services(){
@@ -79,12 +85,28 @@ class PageController extends Controller
 
         $reviews = $service->reviews()->orderBy('id', 'desc')->get();
 
-        return view('service', compact('service', 'reviews'));
+        if(Auth::user()){
+            $view = new View();
+            $view->user_id = Auth::id();
+            $view->service_id = $id;
+            $view->viewing_date = now();
+            $view->save();
+        }
+        
+
+        return view('single-service', compact('service', 'reviews'));
     }
 
     public function contacts(){
 
         return view('contacts');
+    }
+
+    public function favourites(){
+
+        $favourites = Auth::user()->favourites()->orderBy('id', 'desc')->get();
+
+        return view('favourites', compact('favourites'));
     }
     
 }

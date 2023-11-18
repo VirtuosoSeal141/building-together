@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Building Together')
+@section('title', 'Building Together - Мои услуги')
 
 @section('page-content')
     <x-page-header title="Ваши услуги"></x-page-header>

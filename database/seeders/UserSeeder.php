@@ -20,7 +20,9 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'role_id' => 1,
                 'wallet_id' => 1,
-                'telephone' => '89175537107'
+                'telephone' => '89175537107',
+                'foundation_date' => now(),
+                'signup_date' => now(),
             ],
         ];
 

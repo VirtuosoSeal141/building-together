@@ -3297,5 +3297,10 @@ document.addEventListener('DOMContentLoaded', () => {
     thousandsSeparator: ' ' // разделитель тысяч в числе
   })
 
+  // Маска для количества
+  mask('quantity', {
+    mask: '0000' // четыре цифры
+  })
+
 })
 

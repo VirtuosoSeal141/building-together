@@ -7526,6 +7526,67 @@ h6 {
 	background-color: #eee;
 }
 
+.paybtn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(255, 255, 255);
+	text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(0,211,99);
+	background-color: rgb(0,211,99);
+	line-height: 24px;
+	height: 48px;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	margin: 0;
+	transition: background-color 0.4s;
+}
+
+.paybtn:hover{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0,211,99);
+}
+
+.paybtn:focus{
+  box-shadow: 0 0 0 0.2rem rgba(0,211,99,.25);
+}
+
+.favbtn {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(0,211,99);
+	text-align: center;
+  border: none;
+	border-radius: 5px;
+	background-color: rgb(219, 255, 236);
+	line-height: 20px;
+	height: 40px;
+	padding: 10px 13.5px;
+	box-sizing: border-box;
+	margin: 0;
+	transition: background-color 0.5s;
+}
+
+.favbtn:hover{
+  background-color: rgb(0,211,99);
+  color: rgb(255, 255, 255);
+}
+
+.favbtn:focus{
+  box-shadow: 0 0 0 0.2rem rgba(0,211,99,.25);
+}
+
 .delbtn {
 	position: relative;
 	display: inline-block;
@@ -7552,7 +7613,7 @@ h6 {
 }
 
 .delbtn:focus{
-  box-shadow: 0 0 0 0.2rem rgba(255, 224, 224,.25);
+  box-shadow: 0 0 0 0.2rem rgba(224, 0, 0,.25);
 }
 
 .editbtn {
@@ -7581,7 +7642,48 @@ h6 {
 }
 
 .editbtn:focus{
-  box-shadow: 0 0 0 0.2rem rgba(255, 235, 204,.25);
+  box-shadow: 0 0 0 0.2rem rgba(229, 138, 0,.25);
+}
+
+.rating-area {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.rating-area:not(:checked) > input {
+	display: none;
+}
+.rating-area:not(:checked) > label {
+	float: right;
+	width: 42px;
+	padding: 0;
+	cursor: pointer;
+	font-size: 32px;
+	line-height: 32px;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+	content: '★';
+}
+.rating-area > input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+	color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+	position: relative;
 }
 
 /*# sourceMappingURL=style.css.map */

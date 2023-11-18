@@ -97,4 +97,37 @@
             " - " + $( "#slider-range" ).slider( "values", 1 ) + "₽");
     } );
 </script>
+
+<script>
+    var addFav = function ($id) {
+        const btn = document.getElementById('btn'+$id);
+        const icon = document.getElementById('icon'+$id);
+
+        var request = new XMLHttpRequest();
+        request.responseType = 'json';
+        request.open('GET', '/addfavourite/' + $id);
+        request.send();
+        request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200){
+                    btn.setAttribute('onclick', 'delFav('+$id+');');
+                    icon.setAttribute('class', 'fa fa-heart');
+                }
+        }
+    }
+    var delFav = function ($id) {
+        const btn = document.getElementById('btn'+$id);
+        const icon = document.getElementById('icon'+$id);
+
+        var request = new XMLHttpRequest();
+        request.responseType = 'json';
+        request.open('GET', '/delfavourite/' + $id);
+        request.send();
+        request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200){
+                    btn.setAttribute('onclick', 'addFav('+$id+');');
+                    icon.setAttribute('class', 'fa fa-heart-o');
+                }
+        }
+    }
+</script>
 @endsection

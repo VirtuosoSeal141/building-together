@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('comment', 200);
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('service_id')->constrained();
-            $table->integer('rating');
+            $table->string('measure', 15)->unique();
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('units');
     }
 };

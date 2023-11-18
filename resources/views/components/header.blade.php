@@ -33,6 +33,9 @@
                                                 <li><a href="#">Еще <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a href="#">Заказы</a></li>
+                                                        @if(Auth::user()->role->title == "Клиент")
+                                                            <li><a href="{{route('favourites-page')}}">Избранное</a></li>
+                                                        @endif
                                                         <li><a href="{{route('settings-page')}}">Настройки</a></li>
                                                         <li><a href="{{route('logout')}}">Выйти</a></li>
                                                     </ul>

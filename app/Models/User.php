@@ -54,4 +54,26 @@ class User extends Authenticatable
     public function services(){
         return $this->hasMany(Service::class, 'user_id');
     }
+    public function reviews(){
+        return $this->hasMany(Review::class, 'user_id');
+    }
+    public function checkRev($id){
+        $review = $this->reviews()->where('service_id',$id)->get();
+        if(count($review) === 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function favourites(){
+        return $this->hasMany(Favourite::class, 'user_id');
+    }
+    public function checkFav($id){
+        $favourite = $this->favourites()->where('service_id',$id)->get();
+        if(count($favourite) === 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

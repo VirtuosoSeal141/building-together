@@ -24,11 +24,32 @@
                   @enderror
                 </div>
               </div>
+              <div class="col-12">
+                <div class="form-group">
+                    <textarea class="form-control w-100" name="description" id="description" cols="30" rows="6" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Описание*'" placeholder = 'Описание*'>{{old('description')}}</textarea>
+                    @error('description')
+                        <span class="form__error">Введите описание</span>
+                    @enderror
+                </div>
+              </div>
               <div class="col-6">
                 <div class="form-group">
                   <input class="form-control" name="price" id="price" type="text" data-mask="money" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Цена*'" placeholder = 'Цена*' value="{{old('price')}}">
                   @error('price')
                       <span class="form__error">Укажите цену</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                    <select class="form-select form-control" name="unit" id="unit">
+                        <option data-display="Единица измерения*" selected disabled>Единица измерения*</option>
+                        @foreach($units as $unit)
+                            <option value="{{$unit->id}}">{{$unit->measure}}</option>
+                        @endforeach
+                    </select>
+                  @error('unit')
+                      <span class="form__error">Выберите единицу измерения</span>
                   @enderror
                 </div>
               </div>
