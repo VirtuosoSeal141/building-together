@@ -63,6 +63,16 @@
                                         </nav>
                                     </div>
                                 </div>
+                            @else
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                    <div class="main-menu  d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
+                                                <li><i class="fa fa-money white"></i> <a href="#">{{Auth::user()->wallet->balance}} ₽</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
                             @endif
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>

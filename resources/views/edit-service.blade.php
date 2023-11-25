@@ -48,9 +48,6 @@
                           <option value="{{$unit->id}}">{{$unit->measure}}</option>
                       @endforeach
                   </select>
-                @error('unit')
-                    <span class="form__error">Выберите единицу измерения</span>
-                @enderror
               </div>
             </div>
             <div class="col-6">
@@ -61,9 +58,6 @@
                           <option value="{{$category->id}}">{{$category->title}}</option>
                       @endforeach
                   </select>
-                @error('category')
-                    <span class="form__error">Выберите категорию</span>
-                @enderror
               </div>
             </div>
           </div>

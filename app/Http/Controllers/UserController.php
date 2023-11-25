@@ -62,8 +62,6 @@ class UserController extends Controller
             $wallet->balance = 0;
             $wallet->save();
 
-            $avatar = $request->file('avatar')->store('img/avatars');
-
             $user = new User();
             $user->name = $userData['name'];
             $user->email = $userData['email'];
@@ -71,7 +69,7 @@ class UserController extends Controller
             $user->role_id = $id;
             $user->wallet_id = $wallet->id;
             $user->telephone = $userData['telephone'];
-            $user->avatar = $avatar;
+            $user->avatar = $request->file('avatar')->store('img/avatars');
             $user->foundation_date = $userData['found'];
             $user->signup_date = now();
             $user->save();
@@ -124,17 +122,13 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        if ($request->file('avatar') === null){
-            $avatar = Auth::user()->avatar;
-        } else{
-            $avatar = $request->file('avatar')->store('img/avatars');
-        }
-
         $user = User::findOrFail(Auth::id());
         $user->name = $userData['name'];
         $user->email = $userData['email'];
         $user->telephone = $userData['telephone'];
-        $user->avatar = $avatar;
+        if($request->file('avatar')){
+            $user->avatar = $request->file('avatar')->store('img/avatars');
+        }
         $user->save();
 
         return back();

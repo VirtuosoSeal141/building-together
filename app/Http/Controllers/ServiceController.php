@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Favourite;
 use App\Models\Review;
 use App\Models\Service;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -47,8 +48,6 @@ class ServiceController extends Controller
             'title' => 'required|max:100',
             'description' => 'required|max:600',
             'price' => 'required',
-            'unit' => 'required',
-            'category' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -62,8 +61,12 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->title = $serviceData['title'];
         $service->description = $serviceData['description'];
-        $service->category_id = $serviceData['category'];
-        $service->unit_id = $serviceData['unit'];
+        if($request->input('category')){
+            $service->category_id = $serviceData['category'];
+        }
+        if($request->input('unit')){
+            $service->unit_id = $serviceData['unit'];
+        }
         $service->price = $price;
         $service->save();
 
@@ -71,6 +74,12 @@ class ServiceController extends Controller
     }
 
     public function delservice($id){
+
+        View::where('service_id', $id)->delete();
+
+        Review::where('service_id', $id)->delete();
+
+        Favourite::where('service_id', $id)->delete();
 
         Service::findOrFail($id)->delete();
 

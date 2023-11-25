@@ -7475,6 +7475,11 @@ h6 {
   color: #f84646;
 }
 
+.white {
+  color: white;
+}
+
+
 .input-file {
 	position: relative;
 	display: inline-block;
