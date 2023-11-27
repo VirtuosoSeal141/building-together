@@ -16,4 +16,7 @@ class Order extends Model
     public function status(){
         return $this->belongsTo((Status::class));
     }
+    public function service(){
+        return $this->belongsTo((Service::class));
+    }
 }

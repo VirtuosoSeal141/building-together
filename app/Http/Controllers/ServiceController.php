@@ -30,6 +30,12 @@ class ServiceController extends Controller
 
         $price = str_replace(' ','', str_replace(',','.', $serviceData['price']));
 
+        if ($price <= 0){
+            return back()
+                ->withErrors(['price_error'=>'Некорректные данные'])
+                ->withInput();
+        }
+
         $service = new Service();
         $service->title = $serviceData['title'];
         $service->description = $serviceData['description'];
@@ -57,6 +63,12 @@ class ServiceController extends Controller
         }
 
         $price = str_replace(' ','', str_replace(',','.', $serviceData['price']));
+
+        if ($price <= 0){
+            return back()
+                ->withErrors(['price_error'=>'Некорректные данные'])
+                ->withInput();
+        }
 
         $service = Service::findOrFail($id);
         $service->title = $serviceData['title'];

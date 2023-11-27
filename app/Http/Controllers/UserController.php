@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -26,16 +25,12 @@ class UserController extends Controller
                     ->withInput();
             }
 
-            $wallet = new Wallet();
-            $wallet->balance = 0;
-            $wallet->save();
-
             $user = new User();
             $user->name = $userData['name'];
             $user->email = $userData['email'];
             $user->password = bcrypt($userData['password']);
             $user->role_id = $id;
-            $user->wallet_id = $wallet->id;
+            $user->balance = 0;
             $user->telephone = $userData['telephone'];
             $user->foundation_date = now();
             $user->signup_date = now();
@@ -58,16 +53,12 @@ class UserController extends Controller
                     ->withInput();
             }
 
-            $wallet = new Wallet();
-            $wallet->balance = 0;
-            $wallet->save();
-
             $user = new User();
             $user->name = $userData['name'];
             $user->email = $userData['email'];
             $user->password = bcrypt($userData['password']);
             $user->role_id = $id;
-            $user->wallet_id = $wallet->id;
+            $user->balance = 0;
             $user->telephone = $userData['telephone'];
             $user->avatar = $request->file('avatar')->store('img/avatars');
             $user->foundation_date = $userData['found'];
@@ -156,6 +147,63 @@ class UserController extends Controller
                 ->withErrors(['password_error'=>'Неверный пароль'])
                 ->withInput();
         }
+
+        return back();
+    }
+
+    public function plusbalance(Request $request){
+        $walletData = $request->all();
+        $validator = Validator::make($walletData, [
+            'plus' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $money = str_replace(' ','', str_replace(',','.', $walletData['plus']));
+
+        if ($money <= 0){
+            return back()->withErrors(['plus_error'=>'Некорректные данные']);
+        }
+
+        $user = User::findOrFail(Auth::id());
+        $user->balance = $user->balance+$money;
+        $user->save();
+
+        return back();
+    }
+
+    public function minusbalance(Request $request){
+        $walletData = $request->all();
+        $validator = Validator::make($walletData, [
+            'minus' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $money = str_replace(' ','', str_replace(',','.', $walletData['minus']));
+
+        if ($money <= 0){
+            return back()->withErrors(['minus_error'=>'Некорректные данные']);
+        }
+        
+        $user = User::findOrFail(Auth::id());
+
+        if ($money > $user->balance){
+            return back()
+                ->withErrors(['minus_error'=>'Недостаточно средств'])
+                ->withInput();
+        }
+
+        $user->balance = $user->balance-$money;
+        $user->save();
 
         return back();
     }

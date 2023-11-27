@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'email' => 'allu4kin@yandex.ru',
                 'password' => bcrypt('123'),
                 'role_id' => 1,
-                'wallet_id' => 1,
+                'balance' => 0,
                 'telephone' => '89175537107',
                 'foundation_date' => now(),
                 'signup_date' => now(),

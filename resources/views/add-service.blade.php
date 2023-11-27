@@ -38,6 +38,9 @@
                   @error('price')
                       <span class="form__error">Укажите цену</span>
                   @enderror
+                  @error('price_error')
+                      <span class="form__error">{{$message}}</span>
+                  @enderror
                 </div>
               </div>
               <div class="col-6">

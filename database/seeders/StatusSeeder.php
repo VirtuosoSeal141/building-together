@@ -14,7 +14,7 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            ['title' => 'Ожидание оплаты'],
+            ['title' => 'Обработка заказа'],
             ['title' => 'Заявка отменена'],
             ['title' => 'Выполнение'],
             ['title' => 'Выполненено']

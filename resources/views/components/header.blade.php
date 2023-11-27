@@ -32,7 +32,7 @@
                                                 <li><a href="#">Чаты</a></li>
                                                 <li><a href="#">Еще <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
-                                                        <li><a href="#">Заказы</a></li>
+                                                        <li><a href="{{route('orders-page')}}">Заказы</a></li>
                                                         @if(Auth::user()->role->title == "Клиент")
                                                             <li><a href="{{route('favourites-page')}}">Избранное</a></li>
                                                         @endif
@@ -68,7 +68,7 @@
                                     <div class="main-menu  d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><i class="fa fa-money white"></i> <a href="#">{{Auth::user()->wallet->balance}} ₽</a></li>
+                                                <li><i class="fa fa-money white"></i> <a href="{{route('wallet-page')}}">{{Auth::user()->balance}} ₽</a></li>
                                             </ul>
                                         </nav>
                                     </div>

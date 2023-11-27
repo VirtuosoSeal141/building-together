@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email', 50)->unique();
             $table->string('password');
             $table->foreignId('role_id')->constrained();
-            $table->foreignId('wallet_id')->constrained();
+            $table->float('balance', 10, 2);
             $table->string('telephone', 16);
             $table->string('avatar', 100)->default('img/avatars/avatar.jpg');
             $table->date('foundation_date');

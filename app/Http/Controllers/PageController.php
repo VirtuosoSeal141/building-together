@@ -102,11 +102,23 @@ class PageController extends Controller
         return view('contacts');
     }
 
+    public function wallet(){
+
+        return view('wallet');
+    }
+
     public function favourites(){
 
         $favourites = Auth::user()->favourites()->orderBy('id', 'desc')->get();
 
         return view('favourites', compact('favourites'));
+    }
+
+    public function orders(){
+
+        $orders = Auth::user()->orders()->orderBy('id', 'desc')->get();
+
+        return view('orders', compact('orders'));
     }
     
 }

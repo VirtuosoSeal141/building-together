@@ -38,6 +38,9 @@
                 @error('price')
                     <span class="form__error">Это поле должно быть заполненно</span>
                 @enderror
+                @error('price_error')
+                    <span class="form__error">{{$message}}</span>
+                @enderror
               </div>
             </div>
             <div class="col-6">

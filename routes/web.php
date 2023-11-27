@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ServiceController;
@@ -48,3 +49,10 @@ Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts-pag
 Route::get('/favourites', [PageController::class, 'favourites'])->name('favourites-page');
 Route::get('/addfavourite/{id}', [ServiceController::class, 'addfavourite'])->name('addfavourite');
 Route::get('/delfavourite/{id}', [ServiceController::class, 'delfavourite'])->name('delfavourite');
+
+Route::get('/orders', [PageController::class, 'orders'])->name('orders-page');
+Route::post('/addorder/{id}', [OrderController::class, 'addorder'])->name('addorder');
+
+Route::get('/wallet', [PageController::class, 'wallet'])->name('wallet-page');
+Route::post('/plus', [UserController::class, "plusbalance"])->name('plus');
+Route::post('/minus', [UserController::class, "minusbalance"])->name('minus');

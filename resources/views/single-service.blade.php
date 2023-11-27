@@ -100,11 +100,15 @@
                     <div class="col-lg-4">
                         <div class="job_sumary">
                             <div class="summery_header">
-                                <form action="#" class="form-contact contact_form row">
-                                    <input class="form-control col-8" name="quantity" id="quantity" type="number" data-mask="quantity" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Объем работы ({{$service->unit->measure}})*'" placeholder = 'Объем работы ({{$service->unit->measure}})*' value="{{old('quantity')}}">
+                                <form action="{{route('addorder', ['id' => $service->id])}}" method="post" class="form-contact contact_form row">
+                                    @csrf
+                                    <input class="form-control col-8" name="quantity" id="quantity" type="text" data-mask="quantity" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Объем работы ({{$service->unit->measure}})*'" placeholder = 'Объем работы ({{$service->unit->measure}})*' value="{{old('quantity')}}">
                                     <button class="col-4 paybtn" type="submit">Оплатить</button>
                                     @error('quantity')
                                         <span class="form__error">Введите объем работы</span>
+                                    @enderror
+                                    @error('money')
+                                        <span class="form__error">{{$message}}</span>
                                     @enderror
                                 </form>
                             </div>
