@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favourite;
+use App\Models\Order;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\View;
@@ -88,11 +89,9 @@ class ServiceController extends Controller
     public function delservice($id){
 
         View::where('service_id', $id)->delete();
-
         Review::where('service_id', $id)->delete();
-
         Favourite::where('service_id', $id)->delete();
-
+        Order::where('service_id', $id)->delete();
         Service::findOrFail($id)->delete();
 
         return back();

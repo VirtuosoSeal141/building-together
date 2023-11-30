@@ -73,7 +73,18 @@ class User extends Authenticatable
             return false;
         }
     }
-    public function orders(){
-        return $this->hasMany(Order::class, 'user_id');
+    public function clientOrders(){
+        return $this->hasMany(Order::class, 'user1_id');
+    }
+    public function companyOrders(){
+        return $this->hasMany(Order::class, 'user2_id');
+    }
+    public function checkOrder($id){
+        $order = $this->clientOrders()->where('service_id',$id)->where('status_id', 4)->get();
+        if(count($order) === 0){
+            return false;
+        } else {
+            return true;
+        }
     }
 }

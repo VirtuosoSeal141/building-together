@@ -11,7 +11,7 @@
             @if (count($orders) === 0)
                 <div class="row align-items-center">
                     <div class="section_title text-center col-12 p-5">
-                        <h3>Похоже Вы ещё не заказали ни одну услугу...</h3>
+                        <h3>Похоже у Вас ещё нет заказов...</h3>
                     </div>
                     <div class="brouse_job text-center col-12">
                         <a href="{{route('services-page')}}" class="boxed-btn4">Услуги</a>

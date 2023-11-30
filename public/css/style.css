@@ -7059,7 +7059,9 @@ h6 {
 /* line 1373, ../../Arafath/CL/December/235. Job board/HTML/scss/_blog.scss */
 .comments-area .thumb img {
   width: 70px;
+  height: 70px;
   border-radius: 50%;
+  object-fit:cover;
 }
 
 /* line 1379, ../../Arafath/CL/December/235. Job board/HTML/scss/_blog.scss */
@@ -7479,6 +7481,14 @@ h6 {
   color: white;
 }
 
+.userlink {
+  color: rgb(170,177,183);
+}
+
+.userlink:hover{
+  color: rgb(0,211,99);
+}
+
 
 .input-file {
 	position: relative;
@@ -7635,7 +7645,7 @@ h6 {
 	background-color: rgb(255, 235, 204);
 	line-height: 20px;
 	height: 40px;
-	padding: 10px 15px;
+	padding: 10px 14.5px;
 	box-sizing: border-box;
 	margin: 0;
 	transition: background-color 0.5s;

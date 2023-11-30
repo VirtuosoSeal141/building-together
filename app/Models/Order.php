@@ -10,8 +10,8 @@ class Order extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function client(){
+        return $this->belongsTo(User::class, 'user1_id');
     }
     public function status(){
         return $this->belongsTo((Status::class));

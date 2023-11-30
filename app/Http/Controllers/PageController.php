@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Review;
 use App\Models\Role;
 use App\Models\Service;
@@ -116,7 +117,13 @@ class PageController extends Controller
 
     public function orders(){
 
-        $orders = Auth::user()->orders()->orderBy('id', 'desc')->get();
+        if (Auth::user()->role->title === "Клиент"){
+            $orders = Auth::user()->clientOrders()->orderBy('id', 'desc')->get();
+        } elseif (Auth::user()->role->title === "Подрядчик"){
+            $orders = Auth::user()->companyOrders()->orderBy('id', 'desc')->get();
+        } else{
+            $orders = Order::all();
+        }
 
         return view('orders', compact('orders'));
     }

@@ -52,6 +52,8 @@ Route::get('/delfavourite/{id}', [ServiceController::class, 'delfavourite'])->na
 
 Route::get('/orders', [PageController::class, 'orders'])->name('orders-page');
 Route::post('/addorder/{id}', [OrderController::class, 'addorder'])->name('addorder');
+Route::get('/delorder/{id}', [OrderController::class, 'delorder'])->name('delorder');
+Route::get('/changestatus/{id}', [OrderController::class, 'changestatus'])->name('changestatus');
 
 Route::get('/wallet', [PageController::class, 'wallet'])->name('wallet-page');
 Route::post('/plus', [UserController::class, "plusbalance"])->name('plus');

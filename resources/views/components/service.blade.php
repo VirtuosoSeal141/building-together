@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-md-12">
     <div class="single_jobs white-bg d-flex justify-content-between">
         <div class="jobs_left d-flex align-items-center">
-            <img class="mr-4" src="/{{$service->user->avatar}}" style="width: 80px; height: 80px;" alt="">
+            <img class="mr-4" src="/{{$service->user->avatar}}" style="width: 80px; height: 80px; object-fit:cover;" alt="">
             <div class="jobs_conetent">
                 <a href="{{route('service-page', ['id' => $service->id])}}"><h4>{{$service->title}}</h4></a>
                 <div class="links_locat d-flex align-items-center">

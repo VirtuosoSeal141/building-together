@@ -14,10 +14,22 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            ['title' => 'Обработка заказа'],
-            ['title' => 'Заявка отменена'],
-            ['title' => 'Выполнение'],
-            ['title' => 'Выполненено']
+            [
+                'title' => 'Обработка заказа',
+                'icon' => 'fa-spinner fa-pulse'
+            ],
+            [
+                'title' => 'Заказ отменён',
+                'icon' => 'fa-times'
+            ],
+            [
+                'title' => 'Выполнение заказа',
+                'icon' => 'fa-spinner fa-pulse'
+            ],
+            [
+                'title' => 'Заказ выполнен',
+                'icon' => 'fa-check'
+                ]
         ];
 
         DB::table('statuses')->insert($statuses);

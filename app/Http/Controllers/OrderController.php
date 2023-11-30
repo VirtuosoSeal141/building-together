@@ -25,19 +25,25 @@ class OrderController extends Controller
 
         $service = Service::findOrFail($id);
 
-        $user = User::findOrFail(Auth::id());
+        $company = User::findOrFail($service->user_id);
 
-        if ($user->balance < $service->price*$orderData['quantity']){
+        $client = User::findOrFail(Auth::id());
+
+        if ($client->balance < $service->price*$orderData['quantity']){
             return back()
                 ->withErrors(['money'=>'Недостаточно средств'])
                 ->withInput();
         }
 
-        $user->balance = $user->balance-$service->price*$orderData['quantity'];
-        $user->save();
+        $client->balance = $client->balance-$service->price*$orderData['quantity'];
+        $client->save();
+
+        $company->balance = $company->balance+$service->price*$orderData['quantity'];
+        $company->save();
         
         $order = new Order();
-        $order->user_id = Auth::id();
+        $order->user1_id = $client->id;
+        $order->user2_id = $company->id;
         $order->service_id = $id;
         $order->status_id = 1;
         $order->quantity = $orderData['quantity'];
@@ -45,5 +51,35 @@ class OrderController extends Controller
         $order->save();
 
         return redirect('orders');
+    }
+
+    public function delorder($id){
+
+        $order = Order::findOrFail($id);
+        $order->status_id = 2;
+        $order->save();
+
+        $client = User::findOrFail($order->user1_id);
+        $client->balance = $client->balance+$order->cost;
+        $client->save();
+
+        $company = User::findOrFail($order->user2_id);
+        $company->balance = $company->balance-$order->cost;
+        $company->save();
+
+        return back();
+    }
+
+    public function changestatus($id){
+
+        $order = Order::findOrFail($id);
+        if ($order->status_id === 1) {
+            $order->status_id = 3;
+        } elseif ($order->status_id === 3){
+            $order->status_id = 4;
+        }
+        $order->save();
+
+        return back();
     }
 }

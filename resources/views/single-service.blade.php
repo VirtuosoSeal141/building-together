@@ -12,7 +12,7 @@
                     <div class="job_details_header">
                         <div class="single_jobs white-bg d-flex justify-content-between">
                             <div class="jobs_left d-flex align-items-center">
-                                <img class="mr-4" src="/{{$service->user->avatar}}" style="width: 80px; height: 80px;" alt="">
+                                <img class="mr-4" src="/{{$service->user->avatar}}" style="width: 80px; height: 80px; object-fit:cover;" alt="">
                                 <div class="jobs_conetent">
                                     <a href="#"><h4>{{$service->title}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
@@ -55,7 +55,7 @@
                         @endif
                     </div>
                     
-                    @if (Auth::user() && Auth::user()->role->title === "Клиент" && Auth::user()->checkRev($service->id))
+                    @if (Auth::user() && Auth::user()->role->title === "Клиент" && Auth::user()->checkRev($service->id) && Auth::user()->checkOrder($service->id))
                         <div class="apply_job_form white-bg">
                             <div class="col-12">
                                 <h4 class="contact-title">Оставьте свой отзыв</h4>
