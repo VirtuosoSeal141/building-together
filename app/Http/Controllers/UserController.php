@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -61,7 +62,7 @@ class UserController extends Controller
             $user->balance = 0;
             $user->telephone = $userData['telephone'];
             $user->avatar = $request->file('avatar')->store('img/avatars');
-            $user->foundation_date = $userData['found'];
+            $user->foundation_date = Carbon::parse($userData['found']);
             $user->signup_date = now();
             $user->save();
         }

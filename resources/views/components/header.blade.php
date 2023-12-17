@@ -26,6 +26,12 @@
                                                             <li><a href="{{route('addservice-page')}}">Добавить услугу</a></li>
                                                         </ul>
                                                     </li>
+                                                @elseif(Auth::user()->role->title == "Администратор")
+                                                    <li><a href="{{route('services-page')}}">Услуги <i class="ti-angle-down"></i></a>
+                                                        <ul class="submenu">
+                                                            <li><a href="#">Добавить категорию</a></li>
+                                                        </ul>
+                                                    </li>
                                                 @else
                                                     <li><a href="{{route('services-page')}}">Услуги</a></li>
                                                 @endif
@@ -35,6 +41,9 @@
                                                         <li><a href="{{route('orders-page')}}">Заказы</a></li>
                                                         @if(Auth::user()->role->title == "Клиент")
                                                             <li><a href="{{route('favourites-page')}}">Избранное</a></li>
+                                                        @endif
+                                                        @if(Auth::user()->role->title == "Администратор")
+                                                            <li><a href="#">Пользователи</a></li>
                                                         @endif
                                                         <li><a href="{{route('settings-page')}}">Настройки</a></li>
                                                         <li><a href="{{route('logout')}}">Выйти</a></li>

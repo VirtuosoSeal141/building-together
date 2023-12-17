@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('service_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->date('viewing_date');
         });
     }

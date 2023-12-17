@@ -48,6 +48,9 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class);
     }
+    public function views(){
+        return $this->hasMany(View::class, 'user_id');
+    }
     public function services(){
         return $this->hasMany(Service::class, 'user_id');
     }
