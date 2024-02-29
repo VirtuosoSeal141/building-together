@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Favourite;
 use App\Models\Order;
 use App\Models\Review;
@@ -138,5 +139,39 @@ class ServiceController extends Controller
     public function delfavourite($id){
 
         Favourite::where('user_id', Auth::id())->where('service_id', $id)->delete();
+    }
+
+    public function addcategory(Request $request){
+        $categoryData = $request->all();
+        $validator = Validator::make($categoryData, [
+            'category' => 'required|max:30',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $category = new Category();
+        $category->title = $categoryData['category'];
+        $category->save();
+
+        return redirect('/');
+    }
+
+    public function delcategory($id){
+
+        $category = Category::findOrFail($id);
+        foreach ($category->services as $service) {
+            View::where('service_id', $service->id)->delete();
+            Review::where('service_id', $service->id)->delete();
+            Favourite::where('service_id', $service->id)->delete();
+            Order::where('service_id', $service->id)->delete();
+            Service::findOrFail($service->id)->delete();
+        }
+        $category->delete();
+
+        return back();
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
+use App\Models\View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -205,6 +207,68 @@ class UserController extends Controller
 
         $user->balance = $user->balance-$money;
         $user->save();
+
+        return back();
+    }
+
+    public function profilesettings(Request $request, $id){
+        $userData = $request->all();
+        $validator = Validator::make($userData, [
+            'email' => 'required|email:rfc,dns,filter|max:50',
+            'name' => 'required|max:30',
+            'telephone' => 'required|min:16',
+            'avatar' => 'image|mimes:png,jpeg,jpg',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = User::findOrFail($id);
+        $user->name = $userData['name'];
+        $user->email = $userData['email'];
+        $user->telephone = $userData['telephone'];
+        if($request->file('avatar')){
+            $user->avatar = $request->file('avatar')->store('img/avatars');
+        }
+        $user->save();
+
+        return back();
+    }
+
+    public function passwordprofile(Request $request, $id){
+        $passwordData = $request->all();
+        $validator = Validator::make($passwordData, [
+            'newpassword' => 'required|max:50',
+            'repeatpassword' => 'required|max:50',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if($passwordData['newpassword'] === $passwordData['repeatpassword']){
+            $user = User::findOrFail($id);
+            $user->password = bcrypt($passwordData['newpassword']);
+            $user->save();
+        } else {
+            return back()
+                ->withErrors(['password_error'=>'Неверный пароль'])
+                ->withInput();
+        }
+
+        return back();
+    }
+
+    public function delprofile($id){
+
+        View::where('user_id', $id)->delete();
+        Order::where('user2_id', $id)->delete();
+        User::findOrFail($id)->delete();
 
         return back();
     }

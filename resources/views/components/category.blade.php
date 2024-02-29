@@ -11,5 +11,6 @@
                 услуг
             @endif
         </p>
+        <a class="delbtn" href="{{route('delcategory', ['id' => $category->id])}}" style="margin-top: 15px;"> <i class="fa fa-trash"></i> </a>
     </div>
 </div>

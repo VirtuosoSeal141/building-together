@@ -31,6 +31,10 @@ Route::get('/settings', [PageController::class, 'settings'])->name('settings-pag
 Route::post('/personal-settings', [UserController::class, "personalsettings"])->name('personalsettings');
 Route::post('/password-settings', [UserController::class, "passwordsettings"])->name('passwordsettings');
 
+Route::get('/addcategory', [PageController::class, 'addcategory'])->name('addcategory-page');
+Route::post('/addcategory', [ServiceController::class, 'addcategory'])->name('addcategory');
+Route::get('/delcategory/{id}', [ServiceController::class, 'delcategory'])->name('delcategory');
+
 Route::get('/myservices', [PageController::class, 'myservices'])->name('myservices-page');
 Route::get('/addservice', [PageController::class, 'addservice'])->name('addservice-page');
 Route::post('/addservice', [ServiceController::class, 'addservice'])->name('addservice');
@@ -58,3 +62,9 @@ Route::get('/changestatus/{id}', [OrderController::class, 'changestatus'])->name
 Route::get('/wallet', [PageController::class, 'wallet'])->name('wallet-page');
 Route::post('/plus', [UserController::class, "plusbalance"])->name('plus');
 Route::post('/minus', [UserController::class, "minusbalance"])->name('minus');
+
+Route::get('/profiles', [PageController::class, 'profiles'])->name('profiles-page');
+Route::get('/profile/{id}', [PageController::class, 'profile'])->name('profile-page');
+Route::post('/profile-settings/{id}', [UserController::class, "profilesettings"])->name('profilesettings');
+Route::post('/password-profile/{id}', [UserController::class, "passwordprofile"])->name('passwordprofile');
+Route::get('/delprofile/{id}', [UserController::class, 'delprofile'])->name('delprofile');

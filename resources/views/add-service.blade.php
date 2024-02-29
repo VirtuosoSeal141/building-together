@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Building Together - Регистрация')
+@section('title', 'Building Together - Добавление услуги')
 
 @section('page-content')
 

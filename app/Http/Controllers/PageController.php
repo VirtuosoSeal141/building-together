@@ -8,6 +8,7 @@ use App\Models\Review;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\Unit;
+use App\Models\User;
 use App\Models\View;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class PageController extends Controller
             if (Auth::user() && count(Auth::user()->views()->get()) !== 0) {
                 $viewsCounts = array();
                 foreach ($categories as $category) {
-                    $viewsCounts[$category->id] = count(Auth::user()->views()->where('category_id', $category->id)->get());
+                    $viewsCounts[$category->id] = count(Auth::user()->views()->where('category_id', $category->id)->where('viewing_date', '>=', now()->subDays(7))->get());
                 }
                 $favservices = $services->where('category_id', array_search(max($viewsCounts), $viewsCounts));
             } else {
@@ -90,7 +91,6 @@ class PageController extends Controller
     
             arsort($additive);
     
-            $recomendations = array();
             foreach ($additive as $key => $value) {
                 $recomendations[] = Service::findOrFail($key);
             }
@@ -120,6 +120,11 @@ class PageController extends Controller
     public function settings(){
 
         return view('settings');
+    }
+
+    public function addcategory(){
+
+        return view('add-category');
     }
 
     public function myservices(){
@@ -207,4 +212,17 @@ class PageController extends Controller
         return view('orders', compact('orders'));
     }
     
+    public function profiles(){
+
+        $users = User::where('role_id', 2)->get();
+
+        return view('profiles', compact('users'));
+    }
+
+    public function profile($id){
+
+        $user = User::findOrFail($id);
+
+        return view('single-profile', compact('user'));
+    }
 }

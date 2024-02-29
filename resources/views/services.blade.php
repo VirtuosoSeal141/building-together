@@ -71,21 +71,24 @@
                                 <x-service :service="$service"></x-service>
                             @endforeach
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="pagination_wrap">
-                                    <ul>
-                                        @if (!$services->onFirstPage())
-                                            <li><a href="{{ $services->previousPageUrl() }}"> <i class="ti-angle-left"></i> </a></li>
-                                        @endif
-                                        <li><p> {{ $services->currentPage() }} </p></li>
-                                        @if (!$services->onLastPage())
-                                            <li><a href="{{ $services->nextPageUrl() }}"> <i class="ti-angle-right"></i> </a></li>
-                                        @endif
-                                    </ul>
+                        @if (count($services) > 6)
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pagination_wrap">
+                                        <ul>
+                                            @if (!$services->onFirstPage())
+                                                <li><a href="{{ $services->previousPageUrl() }}"> <i class="ti-angle-left"></i> </a></li>
+                                            @endif
+                                            <li><p> {{ $services->currentPage() }} </p></li>
+                                            @if (!$services->onLastPage())
+                                                <li><a href="{{ $services->nextPageUrl() }}"> <i class="ti-angle-right"></i> </a></li>
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
