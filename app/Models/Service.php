@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Service extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     public $timestamps = false;
     public function category(){
@@ -37,5 +38,12 @@ class Service extends Model
             return $rating;
         }
         return 0;
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title
+        ];
     }
 }

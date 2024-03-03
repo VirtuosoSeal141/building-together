@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-xl-3 col-md-6">
     <div class="single_catagory">
-        <a href="#"><h4>{{$category->title}}</h4></a>
+        <a href="{{route('catservices-page', ['id' => $category->id])}}"><h4>{{$category->title}}</h4></a>
         <p> 
             <span>{{count($category->services)}}</span> 
             @if (count($category->services) == 1)
@@ -11,6 +11,8 @@
                 услуг
             @endif
         </p>
-        <a class="delbtn" href="{{route('delcategory', ['id' => $category->id])}}" style="margin-top: 15px;"> <i class="fa fa-trash"></i> </a>
+        @if (Auth::user() && Auth::user()->role->title === "Администратор")
+            <a class="delbtn" href="{{route('delcategory', ['id' => $category->id])}}" style="margin-top: 15px;"> <i class="fa fa-trash"></i> </a>
+        @endif
     </div>
 </div>

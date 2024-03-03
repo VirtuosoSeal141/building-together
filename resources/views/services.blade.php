@@ -13,17 +13,18 @@
                     <div class="job_filter white-bg">
                         <div class="form_inner white-bg">
                             <h3>Фильтр</h3>
-                            <form action="#">
+                            <form action="{{route('filter')}}" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <input type="text" placeholder="Поиск">
+                                            <input name="search" type="text" placeholder="Поиск">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Категория">Категория</option>
+                                            <select class="wide" name="category">
+                                                <option data-display="Категория" value="">Категория</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->title}}</option>
                                                 @endforeach
@@ -31,17 +32,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="range_wrap">
+                                    <label for="amount">Цена:</label>
+                                    <div id="slider-range"></div>
+                                    <p>
+                                        <input name="max" type="hidden" id="max" value="{{$max}}">
+                                        <input name="minPrice" type="hidden" id="minPrice" value="{{$minPrice}}">
+                                        <input name="maxPrice" type="hidden" id="maxPrice" value="{{$maxPrice}}">
+                                        <input name="price" type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                    </p>
+                                </div>
+                                <div class="reset_btn">
+                                    <button  class="boxed-btn3 w-100" type="submit">Поиск</button>
+                                    <a class="clear-btn" href="{{route('services-page')}}">Очистить</a>
+                                </div>
                             </form>
-                        </div>
-                        <div class="range_wrap">
-                            <label for="amount">Цена:</label>
-                            <div id="slider-range"></div>
-                            <p>
-                                <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
-                            </p>
-                        </div>
-                        <div class="reset_btn">
-                            <button  class="boxed-btn3 w-100" type="submit">Поиск</button>
                         </div>
                     </div>
                 </div>
@@ -52,7 +57,7 @@
                                 <div class="col-md-6">
                                     <h4>Список услуг</h4>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="serch_cat d-flex justify-content-end">
                                         <select>
                                             <option data-display="Популярное">Популярное</option>
@@ -60,7 +65,7 @@
                                             <option value="2">По оценкам</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -71,24 +76,7 @@
                                 <x-service :service="$service"></x-service>
                             @endforeach
                         </div>
-                        @if (count($services) > 6)
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="pagination_wrap">
-                                        <ul>
-                                            @if (!$services->onFirstPage())
-                                                <li><a href="{{ $services->previousPageUrl() }}"> <i class="ti-angle-left"></i> </a></li>
-                                            @endif
-                                            <li><p> {{ $services->currentPage() }} </p></li>
-                                            @if (!$services->onLastPage())
-                                                <li><a href="{{ $services->nextPageUrl() }}"> <i class="ti-angle-right"></i> </a></li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                        
+                        <!-- Сюда пагинацию -->
                     </div>
                 </div>
             </div>
@@ -102,17 +90,21 @@
 
 <script>
     $( function() {
+        const max = document.getElementById('max');
+        const minPrice = document.getElementById('minPrice');
+        const maxPrice = document.getElementById('maxPrice');
         $( "#slider-range" ).slider({
             range: true,
             min: 0,
-            max: 24600,
-            values: [ 750, 24600 ],
+            max: max.value,
+            values: [ minPrice.value, maxPrice.value ],
             slide: function( event, ui ) {
                 $( "#amount" ).val(ui.values[ 0 ] + "₽" + " - " + ui.values[ 1 ] + "₽");
+                minPrice.value = ui.values[ 0 ];
+                maxPrice.value = ui.values[ 1 ];
             }
         });
-        $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + "₽" +
-            " - " + $( "#slider-range" ).slider( "values", 1 ) + "₽");
+        $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + "₽" + " - " + $( "#slider-range" ).slider( "values", 1 ) + "₽");
     } );
 </script>
 

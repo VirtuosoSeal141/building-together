@@ -174,4 +174,29 @@ class ServiceController extends Controller
 
         return back();
     }
+
+    public function filter(Request $request){
+        $filterInfo = $request->all();
+
+        if ($request->input('search')) {
+            $services = Service::search($filterInfo['search'])->get()->shuffle();
+        } else{
+            $services = Service::all()->shuffle();
+        }
+
+        if ($request->input('category')) {
+            $services = $services->where('category_id', $filterInfo['category']);
+        }
+
+        $services = $services->where('price', '>=', $filterInfo['minPrice'])->where('price', '<=', $filterInfo['maxPrice']);
+
+        $categories  = Category::orderBy('id','asc')->get();
+
+        $max = $filterInfo['max'];
+        $minPrice = $filterInfo['minPrice'];
+        $maxPrice = $filterInfo['maxPrice'];
+
+        return view('services', compact('categories', 'services', 'max', 'minPrice', 'maxPrice'));
+        
+    }
 }

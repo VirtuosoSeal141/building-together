@@ -50,6 +50,8 @@ Route::get('/delservice/{id}', [ServiceController::class, 'delservice'])->name('
 
 Route::get('/services', [PageController::class, 'services'])->name('services-page');
 Route::get('/service/{id}', [PageController::class, 'service'])->name('service-page');
+Route::post('/services', [ServiceController::class, 'filter'])->name('filter');
+Route::get('/services/{id}', [PageController::class, 'catservices'])->name('catservices-page');
 
 Route::post('/addcomment/{id}', [ServiceController::class, 'addcomment'])->name('addcomment');
 Route::get('/delcomment/{id}', [ServiceController::class, 'delcomment'])->name('delcomment');

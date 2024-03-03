@@ -7724,4 +7724,15 @@ h6 {
   text-transform: uppercase;
   font-size: 14px;
 }
+.reset_btn{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.clear-btn{
+  color: #009DFF;
+  text-transform: uppercase;
+  font-size: 14px;
+  align-self: center;
+}
 /*# sourceMappingURL=style.css.map */

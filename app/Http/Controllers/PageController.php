@@ -168,9 +168,37 @@ class PageController extends Controller
 
         $categories  = Category::orderBy('id','asc')->get();
 
-        $services = Service::paginate(6);
+        $services = Service::all()->shuffle();
 
-        return view('services', compact('categories', 'services'));
+        $prices = array();
+        foreach ($services as $service) {
+            $prices[$service->id] = $service->price;
+        }
+        $max = round(max($prices));
+        $minPrice = round(min($prices));
+        $maxPrice = $max;
+
+        return view('services', compact('categories', 'services', 'max', 'minPrice', 'maxPrice'));
+    }
+
+    public function catservices($id){
+
+        $categories  = Category::orderBy('id','asc')->get();
+
+        $allservices = Service::all();
+
+        $prices = array();
+        foreach ($allservices as $service) {
+            $prices[$service->id] = $service->price;
+        }
+        $max = round(max($prices));
+        $minPrice = round(min($prices));
+        $maxPrice = $max;
+
+        $category = Category::findOrFail($id);
+        $services = $category->services->shuffle();
+
+        return view('services', compact('categories', 'services', 'max', 'minPrice', 'maxPrice'));
     }
 
     public function service($id){
