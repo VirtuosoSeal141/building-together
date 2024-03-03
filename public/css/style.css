@@ -7521,7 +7521,7 @@ h6 {
 	color: rgb(255 255 255);
 	text-align: center;
 	border-radius: 50px;
-	background-color: rgb(2,123,229);;
+	background-color: rgb(2,123,229);
 	line-height: 28px;
 	height: 48px;
 	padding: 10px 20px;
@@ -7717,4 +7717,11 @@ h6 {
 	position: relative;
 }
 
+
+.dop-btn{
+  color: #009DFF;
+  margin-left: 30px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
 /*# sourceMappingURL=style.css.map */

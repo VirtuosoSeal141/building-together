@@ -73,6 +73,7 @@
             </div>
             <div class="form-group mt-3">
               <button type="submit" class="button button-contactForm btn_4 boxed-btn">Зарегистрироваться</button>
+              <a class="dop-btn" href="{{route('login-page')}}">Уже есть аккаунт</a>
             </div>
           </form>
         </div>

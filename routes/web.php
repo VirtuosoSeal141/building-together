@@ -25,6 +25,12 @@ Route::post('/login', [UserController::class, "login"])->name('login');
 Route::get('/sign-up/{id}', [PageController::class, 'signup'])->name('signup-page');
 Route::post('/sign-up/{id}', [UserController::class, "signup"])->name('signup');
 
+Route::get('/forget-password', [PageController::class, "forgetpassword"])->name('forgetpassword-page');
+Route::post('/forget-password', [UserController::class, "forgetpassword"])->name('forgetpassword');
+
+Route::get('/reset-password/{token}', [PageController::class, "resetpassword"])->name('resetpassword-page');
+Route::post('/reset-password', [UserController::class, "resetpassword"])->name('resetpassword');
+
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/settings', [PageController::class, 'settings'])->name('settings-page');

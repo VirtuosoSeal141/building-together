@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\PasswordReset;
 use App\Models\User;
 use App\Models\View;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -271,6 +274,77 @@ class UserController extends Controller
         User::findOrFail($id)->delete();
 
         return back();
+    }
+
+    public function forgetpassword(Request $request) {
+        $userData = $request->only('email');
+
+        $validator = Validator::make($userData, [
+            'email'=>'required|email:rfc,dns,filter',
+        ]);
+
+        if ($validator->fails()){
+            return redirect(route('forgetpassword-page'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $oldReset = PasswordReset::where('email', $userData['email'])->first();
+        if ($oldReset !== null){
+            $oldReset->delete();
+        }
+
+        if (User::where('email', $userData['email'])->first() !== null) {
+            $token = Str::random(64);
+
+            $reset = new PasswordReset();
+            $reset->email = $userData['email'];
+            $reset->token = $token;
+            $reset->save();
+
+            Mail::send('reset-password-email', ['token' => $token, 'email' => $request->email], function($message) use($request){
+                $message->to($request->email);
+                $message->subject('Reset Password');
+            });
+
+            return back()->with('message', 'Письмо отправлено на почту!');
+        }
+
+        return back()
+            ->withErrors(['email_error'=>'Данного пользователя не существует'])
+            ->withInput();
+    }
+
+    public function resetpassword(Request $request) {
+        $userData = $request->only('email', 'token', 'password');
+
+        $validator = Validator::make($userData, [
+            'email'=>'required|email:rfc,dns,filter',
+            'token'=>'required',
+            'password'=>'required',
+        ]);
+
+        if ($validator->fails()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if(PasswordReset::where(['email' => $userData['email'], 'token' => $userData['token']])->first() == null){
+            return back()
+                ->withErrors(['post_error'=>'Данные некорректны или неактуальны'])
+                ->withInput();
+        }
+
+        $user = User::where('email', $userData['email'])->first();
+        if ($user !== null){
+            $user->password = bcrypt($userData['password']);
+            $user->save();
+
+            PasswordReset::where(['email' => $userData['email']])->delete();
+
+            return redirect(route('login-page'))->with('message', 'Пароль обновлен!');
+        }
     }
 
     public function logout(){

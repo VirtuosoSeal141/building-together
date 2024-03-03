@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\View;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -100,9 +101,13 @@ class PageController extends Controller
         return view('index', compact('categories', 'services', 'recomendations'));
     }
 
-    public function login(){
+    public function forgetpassword(){
 
-        return view('login');
+        return view('forget-password');
+    }
+    public function resetpassword(Request $request, $token){
+
+        return view('reset-password', ['email' => $request->email, 'token' => $token]);
     }
 
     public function signup($id){
@@ -115,6 +120,11 @@ class PageController extends Controller
         $role = Role::findOrfail($id);
 
         return view('sign-up', compact('role'));
+    }
+
+    public function login(){
+
+        return view('login');
     }
 
     public function settings(){

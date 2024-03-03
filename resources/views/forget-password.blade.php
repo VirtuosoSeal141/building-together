@@ -1,19 +1,26 @@
 @extends('layout')
 
-@section('title', 'Building Together - Авторизация')
+@section('title', 'Building Together - Восстановление пароля')
 
 @section('page-content')
 
-<x-page-header title="Авторизация"></x-page-header>
+<x-page-header title="Восстановление пароля"></x-page-header>
 
-<section class="contact-section section_padding">
+@if (Session::has('message'))
+  <div class="row align-items-center">
+      <div class="section_title text-center col-12 p-5">
+          <h3>{{ Session::get('message') }}</h3>
+      </div>
+  </div>
+@else
+  <section class="contact-section section_padding">
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h2 class="contact-title">Вход</h2>
+          <h2 class="contact-title">Восстановление пароля</h2>
         </div>
         <div class="col-lg-8">
-          <form class="form-contact contact_form" action="{{route('login')}}" method="post">
+          <form class="form-contact contact_form" action="{{route('forgetpassword')}}" method="post">
             @csrf
             <div class="row">
               <div class="col-12">
@@ -24,24 +31,13 @@
                   @enderror
                 </div>
               </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="password" id="password" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль*'" placeholder = 'Пароль*' value="{{old('password')}}">
-                  @error('password')
-                      <span class="form__error">Введите пароль</span>
-                  @enderror
-                </div>
-              </div>
-              @error('auth_error')
+              @error('email_error')
                   <span class="form__error">{{$message}}</span>
               @enderror
-              @if (Session::has('message'))
-                  <span>{{ Session::get('message') }}</span>
-              @endif
             </div>
             <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Войти</button>
-              <a class="dop-btn" href="{{route('forgetpassword-page')}}">Забыли пароль</a>
+              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Отправить</button>
+              <a class="dop-btn" href="{{route('login-page')}}">Вернуться к авторизации</a>
             </div>
           </form>
         </div>
@@ -64,6 +60,7 @@
       </div>
     </div>
   </section>
+@endif
 @endsection
 
 @section('script')
