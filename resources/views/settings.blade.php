@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Сохарнить</button>
+              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Сохранить</button>
             </div>
           </form>
         </div>
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Сохарнить</button>
+              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Сохранить</button>
             </div>
           </form>
         </div>

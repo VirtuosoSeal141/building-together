@@ -25,10 +25,10 @@ class PageController extends Controller
         $recomendations = array();
 
         if (count($services) !== 0) {
-            if (Auth::user() && count(Auth::user()->views()->get()) !== 0) {
+            if (Auth::user() && count(Auth::user()->views()->where('viewing_date', '>=', now()->subDays(7))->get()) !== 0) {
                 $viewsCounts = array();
                 foreach ($categories as $category) {
-                    $viewsCounts[$category->id] = count(Auth::user()->views()->where('category_id', $category->id)->where('viewing_date', '>=', now()->subDays(7))->get());
+                    $viewsCounts[$category->id] = count(Auth::user()->views()->where('category_id', $category->id)->get());
                 }
                 $favservices = $services->where('category_id', array_search(max($viewsCounts), $viewsCounts));
             } else {
@@ -169,14 +169,20 @@ class PageController extends Controller
         $categories  = Category::orderBy('id','asc')->get();
 
         $services = Service::all()->shuffle();
-
-        $prices = array();
-        foreach ($services as $service) {
-            $prices[$service->id] = $service->price;
+        
+        if (count($services) > 0) {
+            $prices = array();
+            foreach ($services as $service) {
+                $prices[$service->id] = $service->price;
+            }
+            $max = round(max($prices));
+            $minPrice = round(min($prices));
+            $maxPrice = $max;
+        } else{
+            $max = 0;
+            $minPrice = 0;
+            $maxPrice = $max;
         }
-        $max = round(max($prices));
-        $minPrice = round(min($prices));
-        $maxPrice = $max;
 
         return view('services', compact('categories', 'services', 'max', 'minPrice', 'maxPrice'));
     }
@@ -187,13 +193,19 @@ class PageController extends Controller
 
         $allservices = Service::all();
 
-        $prices = array();
-        foreach ($allservices as $service) {
-            $prices[$service->id] = $service->price;
+        if (count($allservices) > 0) {
+            $prices = array();
+            foreach ($allservices as $service) {
+                $prices[$service->id] = $service->price;
+            }
+            $max = round(max($prices));
+            $minPrice = round(min($prices));
+            $maxPrice = $max;
+        } else{
+            $max = 0;
+            $minPrice = 0;
+            $maxPrice = $max;
         }
-        $max = round(max($prices));
-        $minPrice = round(min($prices));
-        $maxPrice = $max;
 
         $category = Category::findOrFail($id);
         $services = $category->services->shuffle();
