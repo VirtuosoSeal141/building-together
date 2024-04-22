@@ -59,7 +59,7 @@
               </div>
               <div class="col-8">
                 <div class="form-group">
-                <label class="input-file ">
+                <label class="input-file">
                     <input type="file" name="avatar" id="avatar">		
                     <span>Добавить логотип</span>
                 </label>

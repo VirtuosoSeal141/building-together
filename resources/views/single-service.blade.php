@@ -49,7 +49,7 @@
                             <div class="comments-area">
                                 <h4>Отзывы ({{count($reviews)}})</h4>
                                 @foreach ($reviews as $review)
-                                    <x-comment :review="$review"></x-comment>
+                                    <x-review :review="$review"></x-review>
                                 @endforeach
                             </div>
                         @endif
@@ -60,7 +60,7 @@
                             <div class="col-12">
                                 <h4 class="contact-title">Оставьте свой отзыв</h4>
                             </div>
-                            <form class="form-contact contact_form" action="{{route('addcomment', ['id' => $service->id])}}" method="post">
+                            <form class="form-contact contact_form" action="{{route('addreview', ['id' => $service->id])}}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">

@@ -14,9 +14,9 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user1_id');
     }
     public function status(){
-        return $this->belongsTo((Status::class));
+        return $this->belongsTo(Status::class);
     }
     public function service(){
-        return $this->belongsTo((Service::class));
+        return $this->belongsTo(Service::class);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 
@@ -53,8 +54,22 @@ Route::get('/service/{id}', [PageController::class, 'service'])->name('service-p
 Route::post('/services', [ServiceController::class, 'filter'])->name('filter');
 Route::get('/services/{id}', [PageController::class, 'catservices'])->name('catservices-page');
 
-Route::post('/addcomment/{id}', [ServiceController::class, 'addcomment'])->name('addcomment');
-Route::get('/delcomment/{id}', [ServiceController::class, 'delcomment'])->name('delcomment');
+Route::post('/addreview/{id}', [ServiceController::class, 'addreview'])->name('addreview');
+Route::get('/delreview/{id}', [ServiceController::class, 'delreview'])->name('delreview');
+
+Route::get('/posts', [PageController::class, 'posts'])->name('posts-page');
+Route::post('/posts', [PostController::class, 'search'])->name('search');
+Route::get('/post/{id}', [PageController::class, 'post'])->name('post-page');
+
+Route::get('/myposts', [PageController::class, 'myposts'])->name('myposts-page');
+Route::get('/addpost', [PageController::class, 'addpost'])->name('addpost-page');
+Route::post('/addpost', [PostController::class, 'addpost'])->name('addpost');
+Route::get('/editpost/{id}', [PageController::class, 'editpost'])->name('editpost-page');
+Route::post('/editpost/{id}', [PostController::class, 'editpost'])->name('editpost');
+Route::get('/delpost/{id}', [PostController::class, 'delpost'])->name('delpost');
+
+Route::post('/addcomment/{id}', [PostController::class, 'addcomment'])->name('addcomment');
+Route::get('/delcomment/{id}', [PostController::class, 'delcomment'])->name('delcomment');
 
 Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts-page');
 

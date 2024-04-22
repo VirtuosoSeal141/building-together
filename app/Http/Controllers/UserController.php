@@ -269,8 +269,6 @@ class UserController extends Controller
 
     public function delprofile($id){
 
-        View::where('user_id', $id)->delete();
-        Order::where('user2_id', $id)->delete();
         User::findOrFail($id)->delete();
 
         return back();

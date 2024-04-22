@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->string('description', 600);
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('unit_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
             $table->float('price', 9, 2);
         });
     }

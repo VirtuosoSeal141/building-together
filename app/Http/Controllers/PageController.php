@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Post;
 use App\Models\Review;
 use App\Models\Role;
 use App\Models\Service;
@@ -274,5 +275,42 @@ class PageController extends Controller
         $user = User::findOrFail($id);
 
         return view('single-profile', compact('user'));
+    }
+
+    public function posts(){
+
+        $posts = Post::orderBy('id', 'desc')->paginate(3);
+
+        return view('posts', compact('posts'));
+    }
+
+    public function myposts(){
+
+        $posts = Auth::user()->posts()->orderBy('id', 'desc')->get();
+
+        return view('my-posts', compact('posts'));
+    }
+
+    public function addpost(){
+
+        return view('add-post');
+    }
+
+    public function editpost($id){
+
+        $post = Post::findOrFail($id);
+
+        return view('edit-post', compact('post'));
+    }
+
+    public function post($id){
+
+        $post = Post::findOrFail($id);
+
+        $otherposts = Post::where('id', '!=', $post->id)->get()->shuffle()->take(4);
+
+        $comments = $post->comments()->orderBy('id', 'desc')->get();
+
+        return view('single-post', compact('post', 'otherposts', 'comments'));
     }
 }

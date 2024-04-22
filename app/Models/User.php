@@ -54,12 +54,26 @@ class User extends Authenticatable
     public function services(){
         return $this->hasMany(Service::class, 'user_id');
     }
+    public function posts(){
+        return $this->hasMany(Post::class, 'user_id');
+    }
     public function reviews(){
         return $this->hasMany(Review::class, 'user_id');
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class, 'user_id');
     }
     public function checkRev($id){
         $review = $this->reviews()->where('service_id',$id)->get();
         if(count($review) === 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function checkCom($id){
+        $comment = $this->comments()->where('post_id',$id)->get();
+        if(count($comment) === 0){
             return true;
         } else {
             return false;

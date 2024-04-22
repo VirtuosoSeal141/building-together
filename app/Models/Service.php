@@ -12,11 +12,11 @@ class Service extends Model
 
     public $timestamps = false;
     public function category(){
-        return $this->belongsTo((Category::class));
+        return $this->belongsTo(Category::class);
     }
 
     public function unit(){
-        return $this->belongsTo((Unit::class));
+        return $this->belongsTo(Unit::class);
     }
 
     public function user(){

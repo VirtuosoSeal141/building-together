@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 30);
             $table->string('email', 50)->unique();
             $table->string('password');
-            $table->foreignId('role_id')->constrained();
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->float('balance', 10, 2);
             $table->string('telephone', 16);
             $table->string('avatar', 100)->default('img/avatars/avatar.jpg');

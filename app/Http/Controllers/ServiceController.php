@@ -89,16 +89,12 @@ class ServiceController extends Controller
 
     public function delservice($id){
 
-        View::where('service_id', $id)->delete();
-        Review::where('service_id', $id)->delete();
-        Favourite::where('service_id', $id)->delete();
-        Order::where('service_id', $id)->delete();
         Service::findOrFail($id)->delete();
 
         return back();
     }
 
-    public function addcomment(Request $request, $id){
+    public function addreview(Request $request, $id){
         $revieweData = $request->all();
         $validator = Validator::make($revieweData, [
             'comment' => 'required|max:200',
@@ -121,7 +117,7 @@ class ServiceController extends Controller
         return back();
     }
 
-    public function delcomment($id){
+    public function delreview($id){
 
         Review::findOrFail($id)->delete();
 
@@ -162,15 +158,7 @@ class ServiceController extends Controller
 
     public function delcategory($id){
 
-        $category = Category::findOrFail($id);
-        foreach ($category->services as $service) {
-            View::where('service_id', $service->id)->delete();
-            Review::where('service_id', $service->id)->delete();
-            Favourite::where('service_id', $service->id)->delete();
-            Order::where('service_id', $service->id)->delete();
-            Service::findOrFail($service->id)->delete();
-        }
-        $category->delete();
+        Category::findOrFail($id)->delete();
 
         return back();
     }
