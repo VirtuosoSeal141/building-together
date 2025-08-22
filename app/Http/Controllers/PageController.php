@@ -313,4 +313,9 @@ class PageController extends Controller
 
         return view('single-post', compact('post', 'otherposts', 'comments'));
     }
+
+    public function chats(){
+
+        return view('chats');
+    }
 }

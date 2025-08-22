@@ -91,3 +91,5 @@ Route::get('/profile/{id}', [PageController::class, 'profile'])->name('profile-p
 Route::post('/profile-settings/{id}', [UserController::class, "profilesettings"])->name('profilesettings');
 Route::post('/password-profile/{id}', [UserController::class, "passwordprofile"])->name('passwordprofile');
 Route::get('/delprofile/{id}', [UserController::class, 'delprofile'])->name('delprofile');
+
+Route::get('/chats', [PageController::class, 'chats'])->name('chats-page');

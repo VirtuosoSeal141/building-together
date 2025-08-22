@@ -17,7 +17,7 @@
                                     <ul id="navigation">
                                         <li><a href="{{route('main-page')}}">Главная</a></li>
                                         @if(Auth::user())
-                                            @if(Auth::user()->role->title == "Подрядчик" || Auth::user()->role->title == "Администратор")
+                                            @if(Auth::user()->role->title == "Подрядчик")
                                                 <li><a href="{{route('posts-page')}}">Новости <i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a href="{{route('myposts-page')}}">Мои новости</a></li>
@@ -55,7 +55,9 @@
                                                     @if(Auth::user()->role->title == "Администратор")
                                                         <li><a href="{{route('profiles-page')}}">Пользователи</a></li>
                                                     @endif
-                                                    <li><a href="{{route('settings-page')}}">Настройки</a></li>
+                                                    @if(Auth::user()->role->title !== "Администратор")
+                                                        <li><a href="{{route('settings-page')}}">Настройки</a></li>
+                                                    @endif
                                                     <li><a href="{{route('logout')}}">Выйти</a></li>
                                                 </ul>
                                             </li>
@@ -89,7 +91,7 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><i class="fa fa-commenting white"></i> <a href="#">Мессенджер</a></li>
+                                            <!-- <li><i class="fa fa-commenting white"></i> <a href="{{route('chats-page')}}">Мессенджер</a></li> -->
                                             @if (Auth::user()->role->title !== "Администратор")
                                                 <li><i class="fa fa-money white"></i> <a href="{{route('wallet-page')}}">{{Auth::user()->balance}} ₽</a></li>
                                             @endif
